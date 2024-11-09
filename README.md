@@ -255,6 +255,8 @@ Verify network creation on all VMs:
 ```bash
 docker network ls
 ```
+![image](https://github.com/user-attachments/assets/09f36e5a-70e6-4b30-98d7-7997f390e3a3)
+
 
 #### Running Docker Containers on all VMs
 
@@ -300,6 +302,9 @@ Configure the channel ("mychannel") that will group Org1, Org2, and Org3. Connec
 First, verify that Org1's nodes and services are running (`docker ps`).
 
 Edit the createChannel.sh script - replace localhost:7050 with VM4's IP (10.65.20.9) on lines 27 and 49.
+
+![image](https://github.com/user-attachments/assets/46146b30-3fad-404f-812c-493e06c1c438)
+
 
 Execute:
 ```bash
@@ -350,6 +355,13 @@ To verify node channel membership:
 docker exec -it peer0.org3.example.com sh
 peer channel list
 ```
+And obtain
+ 
+
+
+![image](https://github.com/user-attachments/assets/64d94c53-ba45-4562-88e8-16a830988c70)
+
+To quit the node runtime, run the exit command.
 
 ### Chaincode Deployment
 
@@ -364,7 +376,9 @@ Written in Javascript (important for configuration instructions).
 
 #### VM1
 
-Use deployChaincode.sh in setup/vm1. Note the presetup() function that initializes dependencies.
+Use deployChaincode.sh in setup/vm1. Note the presetup() function, which is an initialisation function that initialises all the necessary dependencies for a chaincode according to the variables defined in the script, as shown below.
+![image](https://github.com/user-attachments/assets/7bf91efd-56f2-4baa-a932-a55cfe8d164a)
+
 
 Modify CC_RUNTIME_LANGUAGE based on chaincode language (Golang, Node, Typescript, or Java).
 
@@ -372,15 +386,20 @@ Execute functions one by one:
 ```bash
 ./deployChaincode
 ```
+The deployChaincode script contains functions for :
+- Create a package of our chaincode (via the packageChaincode function)
+- Install the chaincode on the endorsing peer which is peer0 (via the installChaincode function).
+- Check that the installation has been successfully installed (via the queryInstalled function)
+- Approve the chaincode for organisation 1 (via the approveMyOrg1 function). Note that localhost (line 118) for this function must be changed to the IP address of the VM4. And also that this function must be performed after the previous one (queryInstalled) as it requires the package_id parameter.
+- Check that the required chaincode validation quota has been reached for it to be deployed on the channel (via the checkCommitReadyness function).  This is a good function to have, but it is not mandatory. This function shows us which organisations have approved the chaincode by giving a json output. We need to have the approval of all the other organisations (Org2 and Org3) before continuing with the following functions.
 
-Functions:
-- packageChaincode
-- installChaincode
-- queryInstalled
-- approveMyOrg1 (change localhost on line 118 to VM4 IP)
-- checkCommitReadyness
+![image](https://github.com/user-attachments/assets/065be20f-c228-4327-bdc8-42336c35dbc4)
 
-Wait for approval from Org2 and Org3 before continuing.
+
+Before continuing with the following functions of the deployChaincode script for VM1, install and approve the chaincode for the Org2 and Org3 organisations.
+
+
+
 
 #### VM2
 
@@ -393,12 +412,15 @@ Execute:
 ./installAndApprove
 ```
 
-Functions:
-- packageChaincode
-- installChaincode
-- queryInstalled
-- approveMyOrg1 (change localhost on line 106 to VM4 IP)
-- checkCommitReadyness
+The installAndApprove script contains functions for :
+- Create a package of our chaincode (via the packageChaincode function)
+- Install the chaincode on the endorsing peer which is peer0 (via the installChaincode function).
+- Check that the installation has been successfully installed (via the queryInstalled function)
+- Approve the chaincode for organisation 1 (via the approveMyOrg1 function). Note that localhost (line 106) for this function must be changed to the IP address of the VM4. And also that this function must be performed after the previous one (queryInstalled) as it requires the package_id parameter.
+- Check that the required chaincode validation quota has been reached for it to be deployed on the channel (via the checkCommitReadyness function). 
+
+![image](https://github.com/user-attachments/assets/8b4fba70-f34f-4b4b-961c-66af57849e03)
+
 
 #### VM3
 
@@ -408,6 +430,7 @@ Execute:
 ```bash
 ./installAndApprove
 ```
+![image](https://github.com/user-attachments/assets/faaea3a3-83dd-494c-a8a4-4e3fc55da3c4)
 
 ### Commit Chaincode
 
