@@ -132,7 +132,7 @@ The repository contains:
 │   ├── vm2/                    # Organization 2 configuration
 │   ├── vm3/                    # Organization 3 configuration
 │   └── vm4/                    # Orderer organization configuration
-
+```
 
 ### Artifacts
 - Channel:
