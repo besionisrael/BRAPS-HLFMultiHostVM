@@ -159,7 +159,12 @@ Contains necessary services to launch for each organization specifically:
 ## Installation Flow
 
 The network configuration follows these steps:
-<img width="386" alt="image" src="https://github.com/user-attachments/assets/a1f4f595-82ab-46bf-a657-531ffe4b57e2">
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/a1f4f595-82ab-46bf-a657-531ffe4b57e2">
+
+In detail, the process can be summarized as follows:
+
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/8f0a7147-7158-41ab-9151-a2c5b5e0da0a">
+
 
 
 ### Genesis block and channel Tx
