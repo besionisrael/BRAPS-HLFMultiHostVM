@@ -3,6 +3,9 @@
 ## Network Topology
 
 The network topology includes 4 virtual machines (VMs). The first three VMs each represent an organization (RQ, SAAQ, PC). Each organization runs its own components (nodes, certificate authority, etc.) to conform to a "multihost multi-organization" deployment. The fourth VM is for an organization containing ordering nodes (Orderer Org).
+![alt text](https://github.com/besionisrael/HLFMultiHostVM/blob/main/Topologie.png)
+
+
 
 ## VM Installation & Configuration 
 
@@ -119,6 +122,18 @@ The configuration continues using the HLFMultiHostVM GitHub repository which can
 
 The repository contains:
 
+```
+.
+├── artifacts/                    # Channel and chaincode artifacts
+│   ├── channel/                 # Channel configuration files
+│   └── src/                     # Smart contract source code
+├── setup1/                      # Configuration files for each VM
+│   ├── vm1/                    # Organization 1 configuration
+│   ├── vm2/                    # Organization 2 configuration
+│   ├── vm3/                    # Organization 3 configuration
+│   └── vm4/                    # Orderer organization configuration
+
+
 ### Artifacts
 - Channel:
   - Config: Contains channel configuration files (configtx.yaml, core.yaml and orderer.yaml)
@@ -144,6 +159,8 @@ Contains necessary services to launch for each organization specifically:
 ## Installation Flow
 
 The network configuration follows these steps:
+<img width="386" alt="image" src="https://github.com/user-attachments/assets/a1f4f595-82ab-46bf-a657-531ffe4b57e2">
+
 
 ### Genesis block and channel Tx
 
